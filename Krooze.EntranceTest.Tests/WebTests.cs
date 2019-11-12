@@ -18,28 +18,32 @@ namespace Krooze.EntranceTest.Tests
         {
         }
 
+
+
+
         [Test]
         public void Movies()
         {
-            var result = _test.GetAllMovies();
-
+            var result = _test.GetAllMoviesAsync();
+            Assert.IsNotNull(result.Result);
+            string json = result.Result.ToString();
+            var parsed = JObject.Parse(json);            
             Assert.IsNotNull(result);
-            var count = result["count"].Value<int>();
-            Assert.AreEqual(count,result["results"].Value<JArray>().Count);
-            var aNewHope = result["results"].Value<JArray>().FirstOrDefault(x => x["episode_id"].Value<int>() == 4);
+            var count = parsed.SelectToken("count").Value<int>();
+            Assert.AreEqual(count, parsed.SelectToken("results").Value<JArray>().Count);
+            var aNewHope = parsed.SelectToken("results").Value<JArray>().FirstOrDefault(x => x["episode_id"].Value<int>() == 4);
             Assert.IsNotNull(aNewHope);
             Assert.AreEqual("A New Hope", aNewHope["title"].Value<string>());
-            
             Assert.Pass();
+
         }
 
         [Test]
         public void Director()
         {
             var result = _test.GetDirector();
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual("George Lucas", result);
+            Assert.IsNotNull(result.Result);
+            Assert.AreEqual("George Lucas", result.Result);
             Assert.Pass();
         }
     }

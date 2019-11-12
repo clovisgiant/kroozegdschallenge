@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Krooze.EntranceTest.WriteHere.Structure.Model
 {
@@ -33,5 +34,15 @@ namespace Krooze.EntranceTest.WriteHere.Structure.Model
     {
         public CruiseDTO Cruise { get; set; }
         public string PassengerCode { get; set; }
+
+        public static implicit operator PassengerCruiseDTO(List<PassengerCruiseDTO> v)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static implicit operator List<object>(PassengerCruiseDTO v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

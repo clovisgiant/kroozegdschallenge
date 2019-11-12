@@ -33,5 +33,7 @@ namespace Krooze.EntranceTest.Tests
         {
             Assert.Throws<Exception>(() => _test.GetCruises(new CruiseRequestDTO() {CruiseCompanyCode = 4}));
         }
+        
+        
     }
 }
