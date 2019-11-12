@@ -15,17 +15,14 @@ namespace Krooze.EntranceTest.WriteHere.Tests.LogicTests
             //you can do it in any way, including intermediary objects            
             string path = string.Empty;   
             var retorno = new CruiseDTO();       
-            var crusedto = new PassengerCruiseDTO();
-           
+            var crusedto = new PassengerCruiseDTO();           
 
             path = @"\Resources\Cruises.xml";           
             var doc = new XmlDocument();
             doc.Load(path);
             var Cruises = doc.SelectNodes(@"//Cruises");
             foreach (XmlNode item in Cruises)
-            {
-
-                
+            {                          
 
                 retorno.CruiseCode = item.SelectSingleNode("./CruiseId").InnerText;
                 retorno.TotalValue = Convert.ToDecimal(item.SelectSingleNode("./TotalCabinPrice").InnerText);
@@ -44,12 +41,8 @@ namespace Krooze.EntranceTest.WriteHere.Tests.LogicTests
                     ShipName = item.SelectSingleNode("./ShipName").InnerText
 
                 }
-                };
-
-
-               
-
-               
+                };          
+                               
             }
 
             return retorno;
